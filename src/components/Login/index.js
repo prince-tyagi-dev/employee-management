@@ -1,13 +1,20 @@
+import { useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
 
 const Login = () => {
   const { setAuth } = useAuth();
+
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.from?.psthname || "/";
+  const from = location.state?.from?.pathname || "/";
+  const usernameRef = useRef();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    usernameRef.current.focus();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setAuth({
       user: { username: "admin", password: "admin@123" },
@@ -23,6 +30,7 @@ const Login = () => {
           type="text"
           name="username"
           placeholder="Enter Username"
+          ref={usernameRef}
           required
         />
         <input

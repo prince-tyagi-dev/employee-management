@@ -4,6 +4,7 @@ import { Enums } from "../../Utility";
 const UnAuthorized = () => {
   const navigate = useNavigate();
   const goBack = (e) => {
+    debugger;
     //e.preventDefault();
     navigate(-1);
   };
