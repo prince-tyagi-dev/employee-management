@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
 
@@ -7,11 +7,16 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const usernameRef = useRef();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    usernameRef.current.focus();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password } = formData;
-    debugger;
+
     // If the given username and password are match with the demo
     // username and password then create the login session.
     if (username === "admin" && password === "admin@123") {
@@ -42,6 +47,7 @@ const Login = () => {
             required
             className="form-control"
             onChange={handleChange}
+            ref={usernameRef}
           />
         </div>
         <div className="form-group">
