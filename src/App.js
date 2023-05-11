@@ -7,20 +7,23 @@ import UnAuthorized from "./components/UnAuthorized";
 import Employee from "./components/Employee";
 import Home from "./components/Home";
 import RequireAuth from "./components/RequireAuth";
-import { Enums } from "./Utility";
+import { Enums } from "./Utility/Enums";
 
 export default function App() {
   const { roles } = Enums;
 
   return (
     <>
+      <div className="App">
+        <h1>Employee Management</h1>
+      </div>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          {/* Public Routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="unauthorized" element={<UnAuthorized />} />
-          <Route path="*" element={<Missing />} />
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/unauthorized" element={<UnAuthorized />} />
+        <Route path="/*" element={<Missing />} />
 
+        <Route path="/" element={<Layout />}>
           {/* Protected Routes for Admin and Empoloyee*/}
           <Route
             element={
@@ -30,16 +33,12 @@ export default function App() {
             <Route path="/" element={<Home />} />
           </Route>
 
-          {/* Protected Roputes for Admin only */}
-          <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
+          {/* Protected Routes for Admin only */}
+          <Route element={<RequireAuth allowedRoles={[roles.Admin]} />}>
             <Route path="/employee" element={<Employee />} />
           </Route>
         </Route>
       </Routes>
-      <div className="App">
-        <h1>Hello CodeSandbox</h1>
-        <h2>Start editing to see some magic happen!</h2>
-      </div>
     </>
   );
 }

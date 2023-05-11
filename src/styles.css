@@ -1,4 +1,13 @@
+@import "bootstrap/dist/css/bootstrap.css";
+
 .App {
   font-family: sans-serif;
   text-align: center;
+  margin-top: 5rem;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.login-page {
+  margin-top: 5rem;
 }
